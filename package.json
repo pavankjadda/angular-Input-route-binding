@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "NG_HMR_TEMPLATES=1 ng serve --watch --hmr",
     "build": "ng build"
   },
   "dependencies": {
@@ -22,6 +22,7 @@
     "@angular/build": "^19.0.0",
     "@angular/cli": "^19.0.0",
     "@angular/compiler-cli": "^19.0.0",
+    "prettier": "^3.4.1",
     "typescript": "^5.6.3"
   }
 }
