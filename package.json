@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "NG_HMR_TEMPLATES=1 ng serve --watch --hmr",
+    "start": "NG_HMR_TEMPLATES=1 ng serve --watch --hmr --port 4201",
     "build": "ng build"
   },
   "dependencies": {

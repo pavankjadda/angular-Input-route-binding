@@ -1,5 +1,5 @@
-import { Component, inject, input } from '@angular/core';
-import { Routes } from '@angular/router';
+import { Component, computed, inject, input } from '@angular/core';
+import { ActivatedRoute, Routes } from '@angular/router';
 import { EmployeeService } from './employee.service';
 
 /**
@@ -14,20 +14,20 @@ import { EmployeeService } from './employee.service';
 	template: `
 		<hr />
 		<h3>Employee Information</h3>
-		<p>First Name: {{ employee?.firstName }}</p>
-		<p>Last Name: {{ employee?.lastName }}</p>
-		<p>Email: {{ employee?.email }}</p>
-		<p>Phone: {{ employee?.phone }}</p>
-		<p>Age: {{ employee?.age }}</p>
+		<p>First Name: {{ employee()?.firstName }}</p>
+		<p>Last Name: {{ employee()?.lastName }}</p>
+		<p>Email: {{ employee()?.email }}</p>
+		<p>Phone: {{ employee()?.phone }}</p>
+		<p>Age: {{ employee()?.age }}</p>
 	`,
 })
 export class EmployeeComponent {
-	id = input<number>();
-	employee = inject(EmployeeService).findEmployeeById(this.id())().data;
-
-	constructor() {
-		console.log('EmployeeComponent id:', this.id());
-	}
+	id = input<number | undefined>();
+	route = inject(ActivatedRoute);
+	employeeId = this.route.snapshot.params['id'];
+	employeeService = inject(EmployeeService);
+	result = this.employeeService.findEmployeeById(this.employeeId);
+	employee = computed(() => this.result()?.data);
 }
 
 //Employee Routes

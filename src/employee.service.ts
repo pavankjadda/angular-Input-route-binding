@@ -31,7 +31,7 @@ export class EmployeeService {
 		return this.useQuery({
 			queryKey: ['employee', employeeId],
 			queryFn: () => {
-				return this.httpClient.get<Employee>(`https://my-json-server.typicode.com/pavankjadda/typicode-data/employees`);
+				return this.httpClient.get<Employee>(`https://my-json-server.typicode.com/pavankjadda/typicode-data/employees/${employeeId}`);
 			},
 			enabled: !!employeeId,
 		}).result;

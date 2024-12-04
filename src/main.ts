@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter, RouterLink, RouterOutlet, Routes, withComponentInputBinding } from '@angular/router';
+import { provideRouter, RouterLink, RouterOutlet, Routes, withComponentInputBinding, withRouterConfig } from '@angular/router';
 import { provideQueryClientOptions } from '@ngneat/query';
 import { provideQueryDevTools } from '@ngneat/query-devtools';
 import { provideHttpClient } from '@angular/common/http';
@@ -37,7 +37,13 @@ export class App {
 
 bootstrapApplication(App, {
 	providers: [
-		provideRouter(routes, withComponentInputBinding()),
+		provideRouter(
+			routes,
+			withComponentInputBinding(),
+			withRouterConfig({
+				paramsInheritanceStrategy: 'always',
+			}),
+		),
 		provideHttpClient(),
 		provideQueryDevTools({ initialIsOpen: false }),
 		provideQueryClientOptions({
